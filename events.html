@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <title>Events</title>
+</head>
+<body>
+    <button id="myBtn">Try Now</button>
+    
+    <script>
+        let btn = document.getElementById("myBtn");
+        btn.addEventListener("click", clicked);
+        btn.addEventListener("mouseover", mouseOvered);
+        btn.addEventListener("mouseout", mouseOuted);
+        
+        function clicked(){
+            console.log("clicked");
+        }
+
+        function mouseOvered(){
+            console.log("Mouseover");
+        }
+
+        function mouseOuted(){
+            console.log("Mouseout");
+        }
+    </script>
+</body>
+</html>

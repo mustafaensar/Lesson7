@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <title>Error Handling</title>
+</head>
+<body>
+    <h1>Error Handling</h1>
+    <p>Please input a number between 2-8</p>
+    <input id="number" type="text">
+    <button type="button" onclick="testData()">Test Data</button>
+    <p id="error"></p>
+
+    <script>
+        /*
+        try{
+            addalert("Error");
+            alert("Error");
+        }
+        catch(err){
+            console.log("error" + err.message);
+            document.getElementById("error").innerHTML = "Error Name: " + err.name + "<br>" + "Error Message" + err.message;
+        }
+        finally{
+            alert("Error Finally");
+        }
+        */
+       function testData(){
+        let errorMessage = document.getElementById("error");
+            errorMessage.innerHTML = "";
+            let msg = document.getElementById("number").value;
+        try{      
+            if(msg.trim() == ""){
+                console.log("Empty");
+                throw "Please input a number"
+            }
+            if(isNaN(msg)){
+                console.log("Not a number");
+                throw "Not a number"
+            }
+            let inputNumber = Number(msg);
+
+            if (inputNumber < 2) {
+                console.log("Only between 2 & 8");
+                console.log(inputNumber);
+                throw "Only between 2 & 8"
+            }
+            if(inputNumber > 8){
+                console.log("Only between 2 & 8");
+                throw "Only between 2 & 8"
+            }
+        }
+        catch(error){
+            console.log(error + "  " + error.name);
+            errorMessage.innerHTML = error
+        }
+       }
+
+    </script>
+</body>
+</html>
