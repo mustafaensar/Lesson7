@@ -29,3 +29,8 @@ html, body{
 #todoContainer {
     margin-top: 25px;
 }
+
+.paragraph-styling {
+    font-size: 20px;
+    color: brown;
+}
