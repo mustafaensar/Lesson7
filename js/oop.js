@@ -45,7 +45,7 @@ const job3 = new Job(
     false
 )
 
-class Car {
+class Car1 {
     constructor(color,brand,year,price,range){
         this.color = color;
         this.brand = brand;
@@ -63,7 +63,7 @@ class Car {
     }
 }
 
-const bmw = new Car("Black","BMW",1977,50000, 150000);
+const bmw = new Car1("Black","BMW",1977,50000, 150000);
 
 console.log(bmw.start());
 console.log(bmw.stop());
@@ -146,20 +146,20 @@ console.log(myDog);
 
 class Animal{
     constructor(name,species,color){
-        this.name = name;
-        this.species = species;
-        this.color = color;
+        this._name = name;
+        this._species = species;
+        this._color = color;
     }
 
     makeSound(){
-        console.log(this.name + " makes sound");
+        console.log(this._name + " makes sound");
     }
 }
 
 class Bird extends Animal{
 
-    constructor(name,species,eyeColor){
-        super(name,species);
+    constructor(name,species,color,eyeColor){
+        super(name,species,color);
         this._eyeColor = eyeColor;
     }
 
@@ -187,3 +187,104 @@ bird.makeSound();
 const animal = new Animal("Animal","Animal species","Yellow");
 
 console.log(animal);
+
+class Car{
+    constructor(range,model){
+        this.range = range;
+        this.model = model;
+    }
+
+    getModelRange(){
+        return this.range + " " + this.model;
+    }
+}
+
+class ElectricCar extends Car{
+    constructor(range,model,battery){
+        super(range,model);
+        this.battery = battery;
+    }
+
+    charge(){
+        return this.model + " is charging..."
+    }
+
+}
+
+class SelfDrivingCar extends ElectricCar{
+    constructor(range,model,battery,auto){
+        super(range,model,battery);
+        this.auto = auto;
+    }
+
+    drive(){
+        return this.model + " AI is driving"
+    }
+}
+
+let mercedes = new SelfDrivingCar(0,"Mercedes",100,"Autopilot");
+console.log(mercedes.getModelRange());
+console.log(mercedes.charge());
+console.log(mercedes.drive());
+
+
+// ENCAPSULATION ve Private-Public-Protected Degiskenler
+
+class Person{
+    #name;
+    #surname
+    constructor(name,surname,age){
+        this.#name = name; // Private degisken
+        this.#surname = surname; // Private degisken
+        this._age = age; // Public degisken ama protected logic
+    }
+
+    get name(){
+        return this.#name
+    }
+
+    set name(newName){
+        this.#name = newName;
+    }
+
+    get surname(){
+        return this.#surname
+    }
+
+    set surname(newSurname){
+        this.#surname = newSurname;
+    }
+
+    get age(){
+        return this._age;
+    }
+
+    /**
+     * Bu sekilde protected hale geliyor
+     */
+    set age(newAge){
+        if(newAge < 0){
+            newAge = 0;
+        }
+        this._age = newAge;
+    }
+
+    /**
+     * bu sekilde de cagirabiliriz ama get ile direk cagirabiliyoruz.
+     */
+    getName(){
+        return this.#name;
+    }
+}
+
+let p = new Person("John","GT",20);
+
+console.log(p.name);
+console.log(p.getName()); // bu sekilde de cagirabiliriz
+
+p.name = "Mustafa"
+// ismi SET etmek istedik ama degismedi. ardindan set methodu ekledik bu sefer oldu
+console.log(p.name);
+// getter ve setter sayesinde private verilerde degisiklik yapilabiliyor.
+p.age = -100
+console.log(p.age);
