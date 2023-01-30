@@ -22,7 +22,7 @@ const job1 = {
     isRemote: false
 }
 
-class Job {
+class Job1 {
     constructor(role, salary, applicationLink, isRemote){
         this.role = role;
         this.salary = salary;
@@ -31,14 +31,14 @@ class Job {
     }
 }
 
-const job2 = new Job(
+const job2 = new Job1(
     "Software Engineer", 
     200000,
     "link2",
     true
 )
 
-const job3 = new Job(
+const job3 = new Job1(
     "Designer",
     1900000,
     "link3",
@@ -288,3 +288,106 @@ console.log(p.name);
 // getter ve setter sayesinde private verilerde degisiklik yapilabiliyor.
 p.age = -100
 console.log(p.age);
+
+class Employee{
+    constructor(firstName,lastName,job){
+        this._firstName = firstName;
+        this._lastName = lastName;
+        this.skills = [];
+        this.job = job
+        Employee._count++; // artik Employee her cagrildiginda count artacak
+    }
+
+    static _count = 0;
+
+    // EK BILGI --> Void : return ü olmayan fonksiyon ve metodlara void deniliyor.
+    learn(skill){
+        this.skills.push(skill);
+    }
+}
+
+class Job{
+    constructor(company,position,salary){
+        this._company = company;
+        this._position = position;
+        this._salary = salary;
+    }
+}
+
+const job_1 = new Job("Ustech","Developer",100);
+const john = new Employee("John","Gr",job_1);
+const michael = new Employee("Michael","Gr",job_1);
+
+john.learn("OOP Programming")
+console.log(john);
+console.log(michael);
+
+class Animals{
+    speak(){
+        console.log("Animals have different sounds.")
+    }
+}
+
+class Cats extends Animals{
+    speak(){
+        console.log("Cat says meow meow...")
+    }
+}
+
+class Dogs extends Animals{
+    speak(){
+        console.log("Dog says hav hav...")
+    }
+}
+
+let cat1 = new Cats();
+
+cat1.speak();
+
+let dog1 = new Dogs();
+
+dog1.speak();
+
+class Shape{
+    constructor(color = "Transparent"){
+        this.color = color;
+        this.type = "Shape"
+    }
+
+    describe(){
+        console.log(`A ${this.color} ${this.type}`)
+    }
+}
+
+class Square extends Shape{
+    constructor(color,sideLength){
+        super(color);
+        this.sideLength = sideLength;
+        this.type = "Square"
+    }
+
+    area(){
+        return this.sideLength * this.sideLength;
+    }
+}
+
+class Rectangle extends Shape{
+    constructor(color,width,height){
+        super(color)
+        this.width = width;
+        this.height = height;
+        this.type = "Rectangle"
+    }
+
+    area(){
+        return this.width * this.height;
+    }
+}
+
+const square = new Square("blue", 5);
+const rectangle = new Rectangle("red", 5, 6);
+console.log( square.area() ); // ?
+console.log( rectangle.area() ); // ?
+for ( const shape of [square, rectangle] ) shape.describe();
+// A blue square
+// A red rectangle
